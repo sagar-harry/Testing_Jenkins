@@ -13,8 +13,12 @@ pipeline {
             steps {
                 dir("C:/Users/Administrator/Desktop/QE_COE/genai_venv/Scripts"){
                     sh "activate"
-                    sh "python test1.py"
                 }
+            }
+        }
+        stage("Stage-2") {
+            steps {
+                sh "python test1.py"
             }
         }
     }
