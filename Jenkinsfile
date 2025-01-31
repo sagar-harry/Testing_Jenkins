@@ -29,10 +29,8 @@ pipeline {
                     bat """
                         cd ${venv_path}
                         activate
-                        popd
-                        pushd ${workspace_path}
+                        cd ${workspace_path}
                         python test1.py
-                        popd
                     """
                     echo "Completed Stage-3"
                 }
