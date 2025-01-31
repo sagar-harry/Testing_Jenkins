@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     def venv_path = "C:/Users/Administrator/Desktop/QE_COE/genai_venv/Scripts"
-                    def workspace_path = "C:/Users/Administrator/Desktop/QE_COE/Jenkins/.jenkins/workspace/testing-1"
+                    def workspace_path = "C:/Users/Administrator/Desktop/QE_COE/Jenkins/.jenkins/workspace/testing-1/Testing_Jenkins"
 
                     bat """
                         cd ${venv_path}
