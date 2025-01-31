@@ -28,7 +28,7 @@ pipeline {
 
                     bat """
                         pushd ${venv_path}
-                        call activate
+                        activate
                         popd
                         pushd ${workspace_path}
                         python test1.py
