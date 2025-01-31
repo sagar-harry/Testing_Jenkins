@@ -12,7 +12,7 @@ pipeline {
             }
         }
         
-        stage("Stage-2: Navigate into repo) {
+        stage("Stage-2: Navigate into repo") {
             steps {
                 dir("Testing_Jenkins"){
                     echo "Inside the repo"
