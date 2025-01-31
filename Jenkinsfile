@@ -1,10 +1,14 @@
 pipeline {
     agent any
+    environment {
+        WORKSPACE = "C:/Users/Administrator/Desktop/QE_COE/Jenkins_pipeline"
+    }
     stages {
         stage("Stage-1") {
             steps {
                 dir("Testing_Jenkins"){
                     echo "Inside the repo"
+                    echo "Workspace path: $WORKSPACE"
                 }
             }
         }
