@@ -29,7 +29,7 @@ pipeline {
         }
         stage("Stage-3") {
             steps {
-                sh "python test1.py"
+                bat "python test1.py"
             }
         }
     }
