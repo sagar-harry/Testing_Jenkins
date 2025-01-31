@@ -32,7 +32,6 @@ pipeline {
                         cd ${workspace_path}
                         python test1.py
                     """
-                    bat "python test1.py"
                     echo "Completed Stage-3"
                 }
             }
