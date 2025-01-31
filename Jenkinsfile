@@ -5,14 +5,16 @@ pipeline {
             steps {
                 dir("Testing_Jenkins"){
                     echo "Inside the repo"
-                    echo "ls"
+                    sh "ls"
                 }
             }
         }
         stage("Stage-2") {
             steps {
                 dir("C:/Users/Administrator/Desktop/QE_COE/genai_venv/Scripts"){
+                    echo "Inside stage-2"
                     sh "activate"
+                    echo "completed stage-2"
                 }
             }
         }
