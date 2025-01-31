@@ -5,7 +5,7 @@ pipeline {
             steps {
                 dir("Testing_Jenkins"){
                     echo "Inside the repo"
-                    sh "ls"
+                    echo "ls"
                 }
             }
         }
