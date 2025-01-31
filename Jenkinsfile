@@ -1,8 +1,7 @@
 pipeline {
     agent any
-    environment {
-        env.WORKSPACE = "C:/Users/Administrator/Desktop/QE_COE/Jenkins_pipeline"
-    }
+    
+    env.WORKSPACE = "C:/Users/Administrator/Desktop/QE_COE/Jenkins_pipeline"
     stages {
         stage("Stage-1") {
             steps {
