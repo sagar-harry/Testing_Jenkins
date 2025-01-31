@@ -27,7 +27,7 @@ pipeline {
                     def workspace_path = "C:/Users/Administrator/Desktop/QE_COE/Jenkins/.jenkins/workspace/testing-1"
 
                     bat """
-                        pushd ${venv_path}
+                        cd ${venv_path}
                         activate
                         popd
                         pushd ${workspace_path}
