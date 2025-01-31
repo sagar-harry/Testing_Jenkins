@@ -22,11 +22,19 @@ pipeline {
         
         stage("Stage-3: Activate environment") {
             steps {
-                dir("C:/Users/Administrator/Desktop/QE_COE/genai_venv/Scripts"){
-                    bat "activate"
-                    bat "cd C:/Users/Administrator/Desktop/QE_COE/Jenkins/.jenkins/workspace/testing-1 && python test1.py"
-                    echo "Completed stage-2"
-                    bat "dir"
+                script {
+                    def venv_path = "C:/Users/Administrator/Desktop/QE_COE/genai_venv/Scripts"
+                    def workspace_path = "C:/Users/Administrator/Desktop/QE_COE/Jenkins/.jenkins/workspace/testing-1"
+
+                    bat """
+                        pushd ${venv_path}
+                        call activate
+                        popd
+                        pushd ${workspace_path}
+                        python test1.py
+                        popd
+                    """
+                    echo "Completed Stage-3"
                 }
             }
         }
