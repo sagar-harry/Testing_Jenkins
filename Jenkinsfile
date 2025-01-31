@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Clone Repo') {
             steps {
-                sh 'git clone https://github.com/sagar-harry/Testing_Jenkins'
+                bat 'git clone https://github.com/sagar-harry/Testing_Jenkins'
             }
         }
         stage("Stage-2") {
