@@ -28,7 +28,7 @@ pipeline {
 
                     bat """
                         cd ${venv_path}
-                        call activate
+                        activate
                         cd ${workspace_path}
                         python test1.py
                     """
