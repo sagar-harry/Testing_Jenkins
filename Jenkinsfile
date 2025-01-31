@@ -13,6 +13,8 @@ pipeline {
                 
                 dir("C:/Users/Administrator/Desktop/QE_COE/genai_venv/Scripts"){
                     bat "activate"
+                    echo "Completed stage-2"
+                    bat "dir"
                 }
             }
         }
