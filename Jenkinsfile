@@ -12,7 +12,7 @@ pipeline {
             steps {
                 
                 dir("C:/Users/Administrator/Desktop/QE_COE/genai_venv/Scripts"){
-                    sh "activate"
+                    bat "activate"
                 }
             }
         }
