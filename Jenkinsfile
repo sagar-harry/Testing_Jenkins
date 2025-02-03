@@ -31,6 +31,8 @@ pipeline {
                         call activate
                         cd ${workspace_path}
                         python test1.py
+                        python test2.py
+                        python test3.py
                     """
                     echo "Completed Stage-3"
                 }
