@@ -24,15 +24,13 @@ pipeline {
             steps {
                 script {
                     def venv_path = "C:/Users/Administrator/Desktop/QE_COE/genai_venv/Scripts"
-                    def workspace_path = "C:/Users/Administrator/Desktop/QE_COE/Jenkins/.jenkins/workspace/testing-1/Testing_Jenkins"
+                    def workspace_path = "C:/Users/Administrator/Desktop/QE_COE/automated_pipeline"
 
                     bat """
                         cd ${venv_path}
                         call activate
                         cd ${workspace_path}
-                        python test1.py
-                        python test2.py
-                        python test3.py
+                        python generate_test_scripts.py
                     """
                     echo "Completed Stage-3"
                 }
