@@ -25,7 +25,8 @@ Click on logout sidebar and click on logout button
 And they should be able to log out
 ","Validates the complete purchase flow
 Use login method in LoginPage class to login to the ui and logout
-Before every new action wait for 3 secs"
+Wait for few secs until elements appear and then perform action
+Test script should return 0 if success -1 if failed"
 Add Items to Cart,"username: //*[@id=""user-name""]
 password: //*[@id=""password""]
 login button: //*[@id=""login-button""]
@@ -37,7 +38,8 @@ Remove fleece Jacket: //*[@id=""remove-sauce-labs-fleece-jacket""]","Given the u
 When they add 'Bike Light' and 'Fleece Jacket' to the cart
 Then the cart badge should display '2'","Verifies correct cart count
 Use login method in LoginPage class to login to the ui   
-Before every new action wait for 3 secs"
+Wait for few secs until elements appear and then perform action
+Test script should return 0 if success -1 if failed"
 Validate Reset Functionality,"username: //*[@id=""user-name""]
 password: //*[@id=""password""]
 login button: //*[@id=""login-button""]
@@ -51,7 +53,8 @@ Then the cart should be empty
 When they add 'Bolt T-Shirt' to the cart after reset
 Then the cart badge should display '1'","Verifies reset functionality
 Use login method in LoginPage class to login to the ui   
-Before every new action wait for 3 secs"
+Wait for few secs until elements appear and then perform action
+Test script should return 0 if success -1 if failed"
 Checkout Process Validation,"username: //*[@id=""user-name""]
 password: //*[@id=""password""]
 login button: //*[@id=""login-button""]
@@ -70,4 +73,5 @@ And they enter 'somename' as First Name, 'lastname' as Last Name, and '123456' a
 And they click 'Continue'
 Then the 'Payment Information' label should be visible","Verifies that payment information section is displayed after entering checkout details
 Use login method in LoginPage class to login to the ui   
-Before every new action wait for 3 secs"
+Wait for few secs until elements appear and then perform action
+Test script should return 0 if success -1 if failed"
