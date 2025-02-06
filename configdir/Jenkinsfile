@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         GIT_CREDENTIALS_ID = 'github-credentials'
-        BRANCH = 'master'
+        BRANCH = 'main'
         DIR_TO_PUSH = '/var/jenkins_home/workspace/testing1'
     }
     stages {
