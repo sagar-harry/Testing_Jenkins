@@ -1,58 +1,56 @@
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+import unittest
 
 class LoginPage:
     def __init__(self, driver):
         self.driver = driver
 
     def login(self, username, password):
-        self.driver.find_element(By.ID, "user-name").send_keys(username)
-        self.driver.find_element(By.ID, "password").send_keys(password)
-        self.driver.find_element(By.ID, "login-button").click()
+        self.driver.find_element(By.CSS_SELECTOR, "#user-name").send_keys(username)
+        self.driver.find_element(By.CSS_SELECTOR, "#password").send_keys(password)
+        self.driver.find_element(By.CSS_SELECTOR, "#login-button").click()
 
-class CheckoutTest:
-    def __init__(self, driver):
-        self.driver = driver
-        self.wait = WebDriverWait(driver, 10)
+class UITestScenario(unittest.TestCase):
 
-    def add_items_to_cart(self):
-        self.driver.find_element(By.ID, "add-to-cart-sauce-labs-bike-light").click()
-        self.driver.find_element(By.ID, "add-to-cart-sauce-labs-fleece-jacket").click()
+    @classmethod
+    def setUpClass(cls):
+        cls.driver = webdriver.Chrome(executable_path='path/to/chromedriver')
+        cls.driver.get("http://example.com/login")
+        cls.driver.maximize_window()
         
-    def proceed_to_checkout(self):
-        self.driver.find_element(By.CSS_SELECTOR, ".shopping_cart_badge").click()
-        self.driver.find_element(By.ID, "checkout").click()
-        
-    def enter_checkout_details(self, first_name, last_name, postal_code):
-        self.driver.find_element(By.ID, "first-name").send_keys(first_name)
-        self.driver.find_element(By.ID, "last-name").send_keys(last_name)
-        self.driver.find_element(By.ID, "postal-code").send_keys(postal_code)
-        self.driver.find_element(By.ID, "continue").click()
-        
-    def verify_payment_information(self):
-        payment_info_label = self.wait.until(
-            EC.visibility_of_element_located((By.CSS_SELECTOR, "[data-test='payment-info-label']"))
-        )
-        assert payment_info_label.is_displayed(), "Payment Information label is not visible"
+    def test_order_checkout_flow(self):
+        login_page = LoginPage(self.driver)
 
-def test_checkout_scenario():
-    driver = webdriver.Chrome()  # Or any other WebDriver you are using
-    driver.get("https://www.example.com/")  # Replace with the actual URL
+        # Step 1: Login as a user
+        login_page.login("testuser", "testpass")
 
-    try:
-        login_page = LoginPage(driver)
-        login_page.login("your_username", "your_password")
+        # Step 2: Add 'Bike Light' and 'Fleece Jacket' to the cart
+        self.driver.find_element(By.CSS_SELECTOR, "#add-to-cart-sauce-labs-bike-light").click()
+        self.driver.find_element(By.CSS_SELECTOR, "#add-to-cart-sauce-labs-fleece-jacket").click()
 
-        checkout_test = CheckoutTest(driver)
-        checkout_test.add_items_to_cart()
-        checkout_test.proceed_to_checkout()
-        checkout_test.enter_checkout_details("somename", "lastname", "123456")
-        checkout_test.verify_payment_information()
-    finally:
-        driver.quit()
+        # Verify items added to cart
+        cart_badge = self.driver.find_element(By.CSS_SELECTOR, ".shopping_cart_badge")
+        self.assertEqual(cart_badge.text, "2", "Cart badge should display 2 items")
 
-test_checkout_scenario()
+        # Step 3: Proceed to checkout
+        self.driver.find_element(By.CSS_SELECTOR, "#checkout").click()
+
+        # Step 4: Enter checkout details
+        self.driver.find_element(By.CSS_SELECTOR, "#first-name").send_keys("somename")
+        self.driver.find_element(By.CSS_SELECTOR, "#last-name").send_keys("lastname")
+        self.driver.find_element(By.CSS_SELECTOR, "#postal-code").send_keys("123456")
+        self.driver.find_element(By.CSS_SELECTOR, "#continue").click()
+
+        # Step 5: Verify 'Payment Information' label is visible
+        payment_info_label = self.driver.find_element(By.CSS_SELECTOR, "[data-test='payment-info-label']")
+        self.assertTrue(payment_info_label.is_displayed(), "'Payment Information' label should be visible")
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.quit()
+
+if __name__ == "__main__":
+    unittest.main()
