@@ -40,8 +40,8 @@ pipeline {
         stage("Stage-4: Copy the generated scripts to the git repo"){
             steps {
                 script {
-                    bat 'pwd'
-                    bat 'cp -r ${DIR_TO_PUSH} repo/'
+                    bat 'cd'
+                    bat 'xcopy /E /I "%DIR_TO_PUSH%" repo\\'
                 }
             }
         }
