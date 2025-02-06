@@ -1,26 +1,23 @@
 pipeline {
     agent any
+    environment {
+        GIT_CREDENTIALS_ID = 'github-credentials'
+        BRANCH = 'main'
+        DIR_TO_PUSH = '/var/jenkins_home/workspace/testing1'
+    }
     stages {
-        stage(''){
+        stage('Stage-1: Clear old files'){
             steps {
                 deleteDir()
             }
         }
-        stage('Stage-1: Clone repository') {
+        stage('Stage-2: Clone repository') {
             steps {
-                bat 'git clone https://github.com/sagar-harry/Testing_Jenkins'
+                sh 'rm -rf repo && git clone https://github.com/sagar-harry/Testing_Jenkins repo'
             }
         }
         
-        stage("Stage-2: Navigate into repo") {
-            steps {
-                dir("Testing_Jenkins"){
-                    echo "Inside the repo"
-                }
-            }
-        }
-        
-        stage("Stage-3: Activate environment") {
+        stage("Stage-3: Generate test scripts") {
             steps {
                 script {
                     def venv_path = "C:/Users/Administrator/Desktop/QE_COE/genai_venv/Scripts"
@@ -33,6 +30,32 @@ pipeline {
                         python generate_test_scripts.py
                     """
                     echo "Completed Stage-3"
+                }
+            }
+        }
+
+        stage("Stage-4: Copy the generated scripts to the git repo"){
+            steps {
+                script {
+                    sh 'pwd'
+                    sh 'cp -r ${DIR_TO_PUSH} repo/'
+                }
+            }
+        }
+
+        stage('Stage-5: Commit and Push') {
+            steps {
+                withCredentials([
+                    gitUsernamePassword(credentialsId: 'github-credentials', gitToolName: 'Default')
+                ]) {
+                    sh '''
+                    cd repo
+                    git config --global user.email "10vidyasagarkonni@gmail.com"
+                    git config --global user.name "sagar-harry"
+                    git add .
+                    git commit -m "register work"
+                    git push origin ${BRANCH}
+                    '''
                 }
             }
         }
