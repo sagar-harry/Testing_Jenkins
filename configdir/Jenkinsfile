@@ -65,7 +65,7 @@ pipeline {
                     git config --global user.name "sagar-harry"
                     git add .
                     git commit -m "register work"
-                    git push origin ${BRANCH}
+                    git push origin master
                     '''
                 }
             }
