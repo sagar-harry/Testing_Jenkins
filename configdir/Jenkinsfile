@@ -16,6 +16,7 @@ pipeline {
                 bat '''
                         rmdir /s /q repo
                         git clone https://github.com/sagar-harry/Testing_Jenkins repo
+                        git clone https://github.com/sagar-harry/Testing_Jenkins_2 destination_repo
                     '''
             }
         }
@@ -60,7 +61,7 @@ pipeline {
                     gitUsernamePassword(credentialsId: 'github-credentials', gitToolName: 'Default')
                 ]) {
                     bat '''
-                    cd repo
+                    cd destination_repo
                     git config --global user.email "10vidyasagarkonni@gmail.com"
                     git config --global user.name "sagar-harry"
                     git add .
