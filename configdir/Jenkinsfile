@@ -31,17 +31,9 @@ pipeline {
                         call activate
                         cd ${workspace_path}
                         python generate_test_scripts.py
+                        python move_test_scripts.py
                     """
                     echo "Completed Stage-3"
-                }
-            }
-        }
-
-        stage("Stage-4: Copy the generated scripts to the git repo"){
-            steps {
-                script {
-                    bat 'cd'
-                    bat 'xcopy /E /I "%DIR_TO_PUSH%" repo\\'
                 }
             }
         }
