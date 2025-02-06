@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Stage-2: Clone repository') {
             steps {
-                sh 'rm -rf repo && git clone https://github.com/sagar-harry/Testing_Jenkins repo'
+                bat 'rm -rf repo && git clone https://github.com/sagar-harry/Testing_Jenkins repo'
             }
         }
         
@@ -37,8 +37,8 @@ pipeline {
         stage("Stage-4: Copy the generated scripts to the git repo"){
             steps {
                 script {
-                    sh 'pwd'
-                    sh 'cp -r ${DIR_TO_PUSH} repo/'
+                    bat 'pwd'
+                    bat 'cp -r ${DIR_TO_PUSH} repo/'
                 }
             }
         }
