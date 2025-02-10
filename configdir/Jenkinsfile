@@ -89,8 +89,23 @@ pipeline {
             }
         }
 
+        stage("Stage-7: Create xml results") {
+            steps {
+                script {
+                    def venv_path = "C:/Users/Administrator/Desktop/QE_COE/genai_venv/Scripts"
+                    def workspace_path = "C:/Users/Administrator/Desktop/QE_COE/automated_pipeline"
 
-        stage('Stage-7: Commit and Push') {
+                    bat """
+                        cd ${venv_path}
+                        call activate
+                        cd ${workspace_path}
+                        python generate_xml_result.py
+                    """
+                    echo "Completed Stage-7"
+                }
+            }
+        }
+        stage('Stage-8: Commit and Push') {
             steps {
                 withCredentials([
                     gitUsernamePassword(credentialsId: 'github-credentials', gitToolName: 'Default')
