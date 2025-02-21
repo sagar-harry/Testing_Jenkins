@@ -1,0 +1,26 @@
+Test Case Name,Selectors,Workflow ,Additional Details
+Verify search by 'Invoice number' option in Invoice Search screens,"username : //input[#'okta-signin-username']
+
+password: //input[#'okta-signin-password']
+
+Business Icon : //div[2]/div[1]/svg[@safeclass~'\bMuiSvgIcon-fontSizeMedium\b.*\bMuiSvgIcon-root\b']
+
+Invoice link : //?/span[@innertext='Mes factures / Mes avoirs']
+
+Invoice search filed : /html//input[@id=':r4v:']
+
+Invoice number : 217178006
+
+username: FRauto_beta1 , password: 1@Loveingram12
+
+Login button : //input[#'okta-signin-submit']","Login to CEP using valid credentials for MF for Invoice
+
+Click on 'My Business' option on the left panel then Click on the Invoices option from the list
+
+Select  'Invoice #' from the dropdown and enter a valid value in the textbox and click on Search icon button.","User should be able to login to CEP portal
+
+User should be navigated to the Invoice Search screen
+
+Application should bring the valid search results matching the entered 'Invoice Number'
+
+Application should not bring  search result."
