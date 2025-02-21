@@ -72,55 +72,55 @@ pipeline {
             }
         }
 
-        stage("Stage-6: Run test scripts") {
-            steps {
-                script {
-                    def venv_path = "C:/Users/Administrator/Desktop/QE_COE/genai_venv/Scripts"
-                    def workspace_path = "C:/Users/Administrator/Desktop/QE_COE/automated_pipeline"
+        // stage("Stage-6: Run test scripts") {
+        //     steps {
+        //         script {
+        //             def venv_path = "C:/Users/Administrator/Desktop/QE_COE/genai_venv/Scripts"
+        //             def workspace_path = "C:/Users/Administrator/Desktop/QE_COE/automated_pipeline"
 
-                    bat """
-                        cd ${venv_path}
-                        call activate
-                        cd ${workspace_path}
-                        python test_scenarios.py
-                    """
-                    echo "Completed Stage-6"
-                }
-            }
-        }
+        //             bat """
+        //                 cd ${venv_path}
+        //                 call activate
+        //                 cd ${workspace_path}
+        //                 python test_scenarios.py
+        //             """
+        //             echo "Completed Stage-6"
+        //         }
+        //     }
+        // }
 
-        stage("Stage-7: Create xml results") {
-            steps {
-                script {
-                    def venv_path = "C:/Users/Administrator/Desktop/QE_COE/genai_venv/Scripts"
-                    def workspace_path = "C:/Users/Administrator/Desktop/QE_COE/automated_pipeline"
+        // stage("Stage-7: Create xml results") {
+        //     steps {
+        //         script {
+        //             def venv_path = "C:/Users/Administrator/Desktop/QE_COE/genai_venv/Scripts"
+        //             def workspace_path = "C:/Users/Administrator/Desktop/QE_COE/automated_pipeline"
 
-                    bat """
-                        cd ${venv_path}
-                        call activate
-                        cd ${workspace_path}
-                        python generate_xml_result.py
-                    """
-                    echo "Completed Stage-7"
-                }
-            }
-        }
-        stage('Stage-8: Commit and Push') {
-            steps {
-                withCredentials([
-                    gitUsernamePassword(credentialsId: 'github-credentials', gitToolName: 'Default')
-                ]) {
-                    bat '''
-                    cd destination_repo
-                    git config --global user.email "10vidyasagarkonni@gmail.com"
-                    git config --global user.name "sagar-harry"
-                    git add .
-                    git commit -m "Push test results"
-                    git push origin main
-                    '''
-                }
-            }
-        }
+        //             bat """
+        //                 cd ${venv_path}
+        //                 call activate
+        //                 cd ${workspace_path}
+        //                 python generate_xml_result.py
+        //             """
+        //             echo "Completed Stage-7"
+        //         }
+        //     }
+        // }
+        // stage('Stage-8: Commit and Push') {
+        //     steps {
+        //         withCredentials([
+        //             gitUsernamePassword(credentialsId: 'github-credentials', gitToolName: 'Default')
+        //         ]) {
+        //             bat '''
+        //             cd destination_repo
+        //             git config --global user.email "10vidyasagarkonni@gmail.com"
+        //             git config --global user.name "sagar-harry"
+        //             git add .
+        //             git commit -m "Push test results"
+        //             git push origin main
+        //             '''
+        //         }
+        //     }
+        // }
 
         
     }
